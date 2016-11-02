@@ -6,7 +6,7 @@ exports.load = function(req, res, next, quizId){
 			if(quiz){
 				req.quiz = quiz;
 				next();	
-			}else{ next(new Error('No existe quizId=' + quizId));}	
+			}else{ next(new Error('No existe quizId= ' + quizId));}	
 		}
 	).catch(function(error){ next(error);});
 };
@@ -29,4 +29,18 @@ exports.answer = function(req, res){
 		resultado='Correcto';
 	}
 	res.render('quizes/answer', {quiz: req.quiz, respuesta: resultado});
+};
+exports.new = function (req, res) {
+	var quiz = models.Quiz.build(
+		{pregunta: "Pregunta", respuesta: "Respuesta"}
+		);
+
+	res.render('quiz/new', {quiz: quiz});
+};
+exports.create = function(req, res){
+	var quiz = models.Quiz.build( req.body.quiz);
+
+	quiz.save({fields: ["pregunta", "respuesta"]}).then(function(){
+		res.redirect('/quizes');	
+	})
 };
