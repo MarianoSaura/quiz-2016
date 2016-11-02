@@ -1,3 +1,7 @@
 <p><%= respuesta %></p>
-<a href="/quizes">Inténtalo otra vez</a>
+<% if(respuesta == 'Incorrecto'){ %>
+	<p>La primera letra es: <%= quiz.respuesta.charAt(0) %><p>	
+<% } %>
+
+<a href="/quizes/<%= quiz.id %>">Inténtalo otra vez</a>
 

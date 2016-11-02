@@ -24,14 +24,16 @@ exports.show = function(req, res){
 };
 
 exports.answer = function(req, res){
-	var resultado = 'Incorrecto';
+	var resultado = ' ';
 	if(req.query.respuesta === req.quiz.respuesta){
 		resultado='Correcto';
+	}else{
+		resultado='Incorrecto';		
 	}
 	res.render('quizes/answer', {quiz: req.quiz, respuesta: resultado, errors: []});
 };
 exports.new = function (req, res) {
-	var quiz = models.Quiz.build(
+	var quiz = models.Quiz.build( 
 		{pregunta: "Pregunta", respuesta: "Respuesta"}
 		);
 
