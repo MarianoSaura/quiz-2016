@@ -14,7 +14,8 @@ sequelize.sync().then(function(){
 	Quiz.count().then(function(count){
 		if(count === 0){
 			Quiz.create({ pregunta: 'Capital de Italia',
-						respuesta: 'Roma'
+						respuesta: 'Roma',
+						cont: 0
 			})
 			.then(function(){console.log('Base de datos inicializada')});
 		};

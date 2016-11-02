@@ -3,5 +3,6 @@ module.exports = function(sequelize, DataTypes){
 	{
 		pregunta: DataTypes.STRING,
 		respuesta: DataTypes.STRING,
+		cont: DataTypes.INTEGER
 	});
 }
