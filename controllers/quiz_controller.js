@@ -20,23 +20,43 @@ exports.index = function(req, res){
 };
 
 exports.show = function(req, res){
-		res.render('quizes/show', {quiz: req.quiz});	
+	var cont=0;
+	if(req.query.fallo) cont=req.query.fallo;
+
+		//console.log("Aquíííííííííiííííííí");
+		res.render('quizes/show', {
+			quiz: req.quiz,
+			fallo: cont
+		});	
 };
 
+	
 exports.answer = function(req, res){
 	var resultado = ' ';
+	var cont=0;
 	if(req.query.respuesta === req.quiz.respuesta){
 		resultado='Correcto';
 	}else{
-		resultado='Incorrecto';		
+		resultado='Incorrecto';
+
+		if(req.query.fallo){
+			cont=req.query.fallo;
+			cont=parseInt(cont);
+		} 
+		cont=cont+1;	
 	}
-	res.render('quizes/answer', {quiz: req.quiz, respuesta: resultado, errors: []});
+	res.render('quizes/answer', {
+		quiz: req.quiz, 
+		respuesta: resultado, 
+		fallos: parseInt(cont), 
+		errors: []});
 };
+
+
 exports.new = function (req, res) {
 	var quiz = models.Quiz.build( 
 		{pregunta: "Pregunta", respuesta: "Respuesta"}
 		);
-
 	res.render('quizes/new', {quiz: quiz});
 };
 exports.create = function(req, res){

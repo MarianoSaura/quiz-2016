@@ -1,7 +1,9 @@
 <p><%= respuesta %></p>
 <% if(respuesta == 'Incorrecto'){ %>
-	<p>La primera letra es: <%= quiz.respuesta.charAt(0) %><p>	
+	<p>La palabra empieza por: <%= quiz.respuesta.substring(0,  fallos ) %><p>
+	<p>Te has equivocado <%= fallos %> vez/ces </p>	
+
 <% } %>
 
-<a href="/quizes/<%= quiz.id %>">Inténtalo otra vez</a>
+<a href="/quizes/<%= quiz.id %>?fallo=<%= fallos %>">Inténtalo otra vez</a>
 
