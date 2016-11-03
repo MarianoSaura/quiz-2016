@@ -1,9 +1,12 @@
 var models= require('../models/models.js');
 
 exports.load = function(req, res, next, quizId){
-	models.Quiz.findById(quizId).then(
+	models.Quiz.findOne({
+		 where: {id: Number(quizId)},
+		 include: [{model: models.Comment }]
+		}).then(
 		function(quiz){
-			if(quiz){
+			if(quiz){ console.log(quiz);
 				req.quiz = quiz;
 				next();	
 			}else{ next(new Error('No existe quizId= ' + quizId));}	
