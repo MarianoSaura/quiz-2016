@@ -1,0 +1,12 @@
+<h1>Edite la pregunta</h1>
+
+<form method="post" action="/quizes/<%= quiz.id %>?_method=put">
+	<% include _form.ejs %>
+</form>
+
+<!-- <label for="preg" class="rem">Pregunta: </label>
+<input type="text" id="preg" name="quiz[pregunta]" value="<%= quiz.pregunta %>"/> <br>
+<label for="resp" class="rem">Respuesta: </label>
+<input type="text" id="resp" name="quiz[respuesta]" value="<%= quiz.respuesta %>"/> <br>
+<a href="/quizes"><button type="button">Cancelar</button></a>
+<input type="submit" value="salvar"> -->
