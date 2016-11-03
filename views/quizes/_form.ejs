@@ -8,9 +8,9 @@
 /><br>
 <label for="resp" class="rem">Respuesta:</label>
 <input type="text" id="resp" name="quiz[respuesta]"
-<% if(quiz.pregunta) { %>
-	value="<%= quiz.respuesta %>"
-<% }else{ %>
+value="<%= quiz.respuesta %>"
+<% if(!quiz.pregunta) { %>
+	
 	placeholder="Respuesta"
 <% } %>
 /><br>
