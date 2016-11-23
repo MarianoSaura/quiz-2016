@@ -5,6 +5,17 @@ exports.loginRequired = function(req, res, next){
 		res.redirect('/login');
 	}
 }
+exports.adminRequired = function(req, res, next){
+	if(req.session.user){
+		if(req.session.user.username=="admin"){
+			next();
+		}else{
+			res.redirect('/login');
+		}
+	}else{
+		res.redirect('/login');
+	}
+}
 
 exports.new = function(req, res){
 	var errors = req.session.errors || {};
