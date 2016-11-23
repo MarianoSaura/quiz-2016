@@ -4,6 +4,7 @@ var router = express.Router();
 var quizController = require('../controllers/quiz_controller');
 var commentController = require('../controllers/comment_controller');
 var sessionController = require('../controllers/session_controller');
+var signController = require('../controllers/sign_controller');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -16,6 +17,11 @@ router.param('commentId', commentController.load);
 router.get('/login', sessionController.new);
 router.post('/login', sessionController.create);
 router.get('/logout', sessionController.destroy);
+
+router.get('/sign', signController.new);
+router.post('/sign', signController.create);
+
+router.get('/user', signController.index); 
 
 router.get('/quizes', quizController.index);
 router.get('/quizes/:quizId(\\d+)', quizController.show);
