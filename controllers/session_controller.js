@@ -5,6 +5,14 @@ exports.loginRequired = function(req, res, next){
 		res.redirect('/login');
 	}
 }
+/* Solo si es el admin Corregirrrrr */
+exports.adminRequired = function(req, res, next){
+	if(req.session.user){
+		next();
+	}else{
+		res.redirect('/login');
+	}
+}
 
 exports.new = function(req, res){
 	var errors = req.session.errors || {};
@@ -27,6 +35,11 @@ exports.create = function (req, res) {
 		
 		res.redirect(req.session.redir.toString());
 	});
+};
+
+exports.edit = function (req, res) {
+	var usuarios = req.usuarios;
+	res.render('sign/edit', {usuarios: usuarios, errors: []});
 };
 
 exports.destroy =function(req, res){

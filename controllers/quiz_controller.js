@@ -22,6 +22,7 @@ exports.index = function(req, res){
 	).catch(function(error){next(error);})	
 };
 
+
 exports.show = function(req, res){
 		res.render('quizes/show', {quiz: req.quiz});	
 };

@@ -21,6 +21,10 @@ router.get('/logout', sessionController.destroy);
 router.get('/sign', signController.new);
 router.post('/sign', signController.create);
 
+router.get('/sign/:usuariosId(\\d+)/edit', sessionController.adminRequired, sesionController.edit);
+router.delete('/sign/:usuariosId(\\d+)', sessionController.adminRequired, sesionController.destroy);
+
+
 router.get('/user', signController.index); 
 
 router.get('/quizes', quizController.index);
