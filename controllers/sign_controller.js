@@ -28,7 +28,10 @@ exports.create = function (req, res) {
 			}
 		).catch(function(error){next(error)});
 	}else{
-		callback(new Error("No coincide la contraseña"));
+		var err = new Error('Las contraseñas no son iguales');
+
+		res.render('sign/new', {errors: [err]});
+
 	}
 };
 
