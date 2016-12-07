@@ -13,6 +13,8 @@ exports.autenticar = function(login, password, callback){
 		function(user){
 			if(user){
 				callback(null, user);
+			}else{
+				callback(new Error("Usuario o contraseña incorrectos"));
 			}	
 		}
 	).catch(function(error){ 

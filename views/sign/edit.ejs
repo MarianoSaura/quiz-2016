@@ -1,5 +1,23 @@
-<h1>Edite la pregunta</h1>
+<h1>Edite al usuario</h1>
+<form method="post" action="/sign/<%= usuarios.id %>?_method=put">
+	<label for="preg" class="rem">Usuario:</label>
+	<input type="text" id="preg" name="usuarios[username]" 
+	<% if(usuarios.username) { %>
+		value="<%= usuarios.username %>"
+	<% }else{ %>
+		placeholder="username"
+	<% } %>
+	/><br>
 
-<form method="post" action="/quizes/<%= quiz.id %>?_method=put">
-	<% include _form.ejs %>
+	<label for="resp" class="rem">Contraseña:</label>
+	<input type="text" id="resp" name="usuarios[password]"
+	value="<%= usuarios.password %>"
+	<% if(!usuarios.username) { %>
+		placeholder="password"
+	<% } %>
+
+	/><br> 
+	<a href="/user"><button type="button">Cancelar</button></a>
+
+	<input type="submit" name="Salvar">
 </form>

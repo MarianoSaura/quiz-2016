@@ -13,6 +13,7 @@ router.get('/', function(req, res, next) {
 
 router.param('quizId', quizController.load);
 router.param('commentId', commentController.load);
+router.param('usuariosId', sessionController.load);
 
 router.get('/login', sessionController.new);
 router.post('/login', sessionController.create);
@@ -21,8 +22,9 @@ router.get('/logout', sessionController.destroy);
 router.get('/sign', signController.new);
 router.post('/sign', signController.create);
 
-router.get('/sign/:usuariosId(\\d+)/edit', sessionController.adminRequired, sesionController.edit);
-router.delete('/sign/:usuariosId(\\d+)', sessionController.adminRequired, sesionController.destroy);
+router.get('/sign/:usuariosId(\\d+)/edit', sessionController.adminRequired, sessionController.edit);
+router.put('/sign/:usuariosId(\\d+)', sessionController.adminRequired, sessionController.update);
+router.delete('/sign/:usuariosId(\\d+)', sessionController.adminRequired, sessionController.destroy);
 
 
 router.get('/user', signController.index); 
