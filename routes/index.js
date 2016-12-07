@@ -22,9 +22,13 @@ router.get('/logout', sessionController.destroy);
 router.get('/sign', signController.new);
 router.post('/sign', signController.create);
 
+
+/*router.get('/sign/:usuariosId(\\d+)/edit', sessionController.loginRequired, sessionController.edit);
+router.put('/sign/:usuariosId(\\d+)', sessionController.loginRequired, sessionController.update);*/
+
 router.get('/sign/:usuariosId(\\d+)/edit', sessionController.adminRequired, sessionController.edit);
 router.put('/sign/:usuariosId(\\d+)', sessionController.adminRequired, sessionController.update);
-router.delete('/sign/:usuariosId(\\d+)', sessionController.adminRequired, sessionController.destroy);
+router.delete('/sign/:usuariosId(\\d+)', sessionController.adminRequired, sessionController.delete);
 
 
 router.get('/user', signController.index); 
