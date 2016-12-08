@@ -22,9 +22,9 @@ exports.loginRequired = function(req, res, next){
 }
 exports.adminRequired = function(req, res, next){
 	//console.log("----------------------> "+req.session.user.username);
-
 	if("admin"===req.session.user.username){
-
+		next();
+	}else if(req.user.id===req.session.user.id){
 		next();
 	}else{
 		res.redirect('/login');
@@ -55,6 +55,7 @@ exports.create = function (req, res) {
 };
 
 exports.edit = function (req, res) {
+
 	var usuarios = req.user;
 	res.render('sign/edit', {usuarios: usuarios, errors: []});
 };
