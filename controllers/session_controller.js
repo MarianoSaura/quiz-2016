@@ -60,7 +60,9 @@ exports.edit = function (req, res) {
 	res.render('sign/edit', {usuarios: usuarios, errors: []});
 };
 exports.update = function (req, res) {
-	req.user.username = req.body.usuarios.username;
+	if("admin"===req.session.user.username){
+		req.user.username = req.body.usuarios.username;
+	}
 	req.user.password = req.body.usuarios.password;
 
 	req.user
@@ -85,7 +87,9 @@ exports.destroy =function(req, res){
 }
 
 exports.delete = function(req, res){
-	req.user.destroy().then( function() {
-		res.redirect('/user');
-	}).catch(function (error) {next(error)});
+	if("admin"===req.session.user.username){
+		req.user.destroy().then( function() {
+			res.redirect('/user');
+		}).catch(function (error) {next(error)});
+	}
 };

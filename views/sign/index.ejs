@@ -5,13 +5,17 @@
 
 	<% if(session.user) { %>
 		<tr>
-			<td><a href="/sign/<%= usuarios[i].id %>/edit"><button>editar</button></a></td>
+			<% if(session.user.id == usuarios[i].id || session.user.username=='admin') { %>
+				<td><a href="/sign/<%= usuarios[i].id %>/edit"><button>editar</button></a></td>
+			<% } %>
+			<% if(session.user.username=='admin') { %>
 			<td>
 				<form method="post" action="sign/<%= usuarios[i].id %>?_method=delete">
 					<button type="submit" onClick="return confirm('Borrar: <%usuarios[i].pregunta %>');"> borrar
 					</button>	
 				</form>
 			</td>
+			<% } %>
 		</tr>
 	<% } %>
 	

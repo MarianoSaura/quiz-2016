@@ -1,5 +1,6 @@
-<h1>Edite al usuario</h1>
+<h1>Edite al usuario <%= usuarios.username %></h1>
 <form method="post" action="/sign/<%= usuarios.id %>?_method=put">
+<% if(session.user.username=='admin') { %>
 	<label for="preg" class="rem">Usuario:</label>
 	<input type="text" id="preg" name="usuarios[username]" 
 	<% if(usuarios.username) { %>
@@ -8,7 +9,7 @@
 		placeholder="username"
 	<% } %>
 	/><br>
-
+<% } %>
 	<label for="resp" class="rem">Contraseña:</label>
 	<input type="text" id="resp" name="usuarios[password]"
 	value="<%= usuarios.password %>"
