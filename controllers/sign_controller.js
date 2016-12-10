@@ -38,6 +38,7 @@ exports.create = function (req, res) {
 exports.index = function(req, res){
 	models.Usuarios.findAll().then(
 		function(usuarios) {
+			
 		res.render('sign/index', {usuarios: usuarios, errors: []});
 		}
 	).catch(function(error){next(error);})	
