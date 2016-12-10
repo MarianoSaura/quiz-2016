@@ -31,6 +31,34 @@ exports.answer = function(req, res){
 	var resultado = 'Incorrecto';
 	if(req.query.respuesta === req.quiz.respuesta){
 		resultado='Correcto';
+		if(req.session.user){
+			if(isNaN(req.session.user.aciertos)){
+				var nAciertos=1;
+			}else{
+				var nAciertos=req.session.user.aciertos++;
+				console.log("------------>"+req.session.user.aciertos);
+			}
+
+			var usuario = models.Usuarios.build(
+					{aciertos: nAciertos
+				})
+								/*usuario
+							.validate()
+							.then(
+								function(err){
+									if(err){
+										res.render('sign/new.ejs',
+											{errors: err.errors});
+									}else{
+										usuario
+										.save()
+										.then(function () { res.redirect('/user')})
+									}
+								
+								}
+							).catch(function(error){next(error)});*/
+			console.log("------------>"+ parseInt(usuario.aciertos));
+		}
 	}
 	res.render('quizes/answer', {quiz: req.quiz, respuesta: resultado, errors: []});
 };
