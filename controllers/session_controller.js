@@ -35,7 +35,7 @@ exports.create = function (req, res) {
 			req.session.errors = [{"message": 'se ha producido un error: '+error}];
 			res.redirect('/login');
 		}
-		req.session.user = {id:user.id, username:user.username, aciertos: user.aciertos};
+		req.session.user = {id:user.id, username:user.username};
 		
 		res.redirect(req.session.redir.toString());
 	});
