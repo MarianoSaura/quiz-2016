@@ -32,32 +32,30 @@ exports.answer = function(req, res){
 	if(req.query.respuesta === req.quiz.respuesta){
 		resultado='Correcto';
 		if(req.session.user){
-			if(isNaN(req.session.user.aciertos)){
-				var nAciertos=1;
+			console.log("------------>"+req.session.user.aciertos);
+			if(isNaN(parseInt(req.session.user.aciertos))){
+				req.session.user.aciertos=1;
+				console.log("------------>"+req.session.user.aciertos);
 			}else{
-				var nAciertos=req.session.user.aciertos++;
+				req.session.user.aciertos=parseInt(req.session.user.aciertos)+1;
 				console.log("------------>"+req.session.user.aciertos);
 			}
 
-			var usuario = models.Usuarios.build(
-					{aciertos: nAciertos
-				})
-								/*usuario
-							.validate()
-							.then(
-								function(err){
-									if(err){
-										res.render('sign/new.ejs',
-											{errors: err.errors});
-									}else{
-										usuario
-										.save()
-										.then(function () { res.redirect('/user')})
-									}
-								
-								}
-							).catch(function(error){next(error)});*/
-			console.log("------------>"+ parseInt(usuario.aciertos));
+			models.Usuarios.findOne({
+			 where: {id: Number(req.session.user.id)}
+			}).then(
+				function(usuario){
+					if(usuario){
+						usuario.aciertos=req.session.user.aciertos;
+						usuario.save({fields: ["aciertos"]})
+						
+					}else{
+						res.render('/login',
+						{errors: new Error('No está correctamente autenticado')});
+					}
+				
+				}
+			).catch(function(error){next(error)});
 		}
 	}
 	res.render('quizes/answer', {quiz: req.quiz, respuesta: resultado, errors: []});
