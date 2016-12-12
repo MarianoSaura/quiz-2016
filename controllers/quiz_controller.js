@@ -33,6 +33,7 @@ exports.answer = function(req, res){
 		resultado='Correcto';
 		if(req.session.user){
 			console.log("------------>"+req.session.user.aciertos);
+					
 			if(isNaN(parseInt(req.session.user.aciertos))){
 				req.session.user.aciertos=1;
 				console.log("------------>"+req.session.user.aciertos);

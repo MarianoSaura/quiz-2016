@@ -1,18 +1,5 @@
 var models= require('../models/models.js');
 
-exports.load = function(req, res, next, usuariosId){
-	models.Usuarios.findOne({
-		 where: {id: Number(usuariosId)},
-		}).then(
-		function(user){
-			if(user){
-				req.user = user;
-				next();	
-			}else{ next(new Error('No existe usuariosId= ' + usuariosId));}	
-		}
-	).catch(function(error){ next(error);});
-};
-
 exports.loginRequired = function(req, res, next){
 	if(req.session.user){
 		next();
@@ -48,7 +35,7 @@ exports.create = function (req, res) {
 			req.session.errors = [{"message": 'se ha producido un error: '+error}];
 			res.redirect('/login');
 		}
-		req.session.user = {id:user.id, username:user.username};
+		req.session.user = {id:user.id, username:user.username, aciertos: user.aciertos};
 		
 		res.redirect(req.session.redir.toString());
 	});

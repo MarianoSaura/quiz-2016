@@ -5,6 +5,7 @@ var quizController = require('../controllers/quiz_controller');
 var commentController = require('../controllers/comment_controller');
 var sessionController = require('../controllers/session_controller');
 var signController = require('../controllers/sign_controller');
+var userController = require('../controllers/user_controller');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -13,7 +14,7 @@ router.get('/', function(req, res, next) {
 
 router.param('quizId', quizController.load);
 router.param('commentId', commentController.load);
-router.param('usuariosId', sessionController.load);
+router.param('usuariosId', userController.load);
 
 router.get('/login', sessionController.new);
 router.post('/login', sessionController.create);

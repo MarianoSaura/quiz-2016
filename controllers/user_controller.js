@@ -1,5 +1,18 @@
 var models= require('../models/models.js');
 
+exports.load = function(req, res, next, usuariosId){
+	models.Usuarios.findOne({
+		 where: {id: Number(usuariosId)},
+		}).then(
+		function(user){
+			if(user){
+				req.user = user;
+				next();	
+			}else{ next(new Error('No existe usuariosId= ' + usuariosId));}	
+		}
+	).catch(function(error){ next(error);});
+};
+
 /*var users = { admin: {id: 1, username:"admin", password:"1234"},
 			pepe: {id:2, username:"pepe", password:"5678"}
 			};*/
